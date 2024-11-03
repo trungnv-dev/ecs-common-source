@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecs\RepositoryCommand\Repositories;
+namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 

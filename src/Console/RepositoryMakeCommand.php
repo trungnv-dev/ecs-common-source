@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecs\RepositoryCommand\Console;
+namespace Ecs\Command\Console;
 
 use Illuminate\Console\GeneratorCommand;
 use InvalidArgumentException;

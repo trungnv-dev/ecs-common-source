@@ -2,38 +2,13 @@
 
 namespace Ecs\Command\Console;
 
-use Illuminate\Console\GeneratorCommand;
-use Symfony\Component\Console\Input\InputInterface;
+use Illuminate\Routing\Console\ControllerMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Str;
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\suggest;
 
-class ServiceMakeCommand extends GeneratorCommand
+class CustomControllerMakeCommand extends ControllerMakeCommand
 {
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:service';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new service class';
-
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $type = 'Service';
-
     /**
      * Get the stub file for the generator.
      *
@@ -41,11 +16,11 @@ class ServiceMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        $stub = $this->option('repository')
-            ? '/stubs/service.repository.stub'
-            : '/stubs/service.stub';
+        if ($this->option('repository')) {
+            return $this->resolveStubPath('/stubs/controller.repository.stub');
+        }
 
-        return $this->resolveStubPath($stub);
+        return parent::getStub();
     }
 
     /**
@@ -62,17 +37,6 @@ class ServiceMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        return $rootNamespace.'\Services';
-    }
-
-    /**
      * Build the class with the given name.
      *
      * @param  string  $name
@@ -80,17 +44,23 @@ class ServiceMakeCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        $replace = [];
-
         if ($this->option('repository')) {
+            $replace = [];
+
             $replace = $this->buildRepositoryReplacements($replace);
+
+            $stub = $this->files->get($this->getStub());
+
+            $stub = $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+
+            $class = str_replace(
+                array_keys($replace), array_values($replace), $stub
+            );
+
+            return $class;
         }
 
-        $class = str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
-        );
-
-        return $class;
+        return parent::buildClass($name);
     }
 
     /**
@@ -150,51 +120,8 @@ class ServiceMakeCommand extends GeneratorCommand
      */
     protected function getOptions()
     {
-        return [
-            ['repository', null, InputOption::VALUE_OPTIONAL, 'Generate a resource service for the given repository'],
-            ['model', 'm', InputOption::VALUE_OPTIONAL, 'Generate a resource repository for the given model if exists repository option'],
-        ];
-    }
-
-    /**
-     * Interact further with the user if they were prompted for missing arguments.
-     *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @return void
-     */
-    protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output)
-    {
-        if ($this->didReceiveOptions($input)) {
-            return;
-        }
-
-        $input->setOption('repository', suggest(
-            label: "What repository should this service be for? (Optional)",
-            options: $this->possibleRepositories()
-        ));
-
-        if ($this->option('repository')) {
-            $input->setOption('model', suggest(
-                label: "What model should this repository be for? (Optional)",
-                options: $this->possibleModels()
-            ));
-        }
-    }
-
-    /**
-     * Get a list of possible repository names.
-     *
-     * @return array<int, string>
-     */
-    protected function possibleRepositories()
-    {
-        $path = is_dir(app_path('Repositories')) ? app_path('Repositories') : app_path();
-
-        return collect(Finder::create()->files()->depth(0)->in($path))
-            ->map(fn ($file) => $file->getBasename('.php'))
-            ->sort()
-            ->values()
-            ->all();
+        return array_merge(parent::getOptions(), [
+            ['repository', null, InputOption::VALUE_OPTIONAL, 'Generate a resource controller for the given repository']
+        ]);
     }
 }

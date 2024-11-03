@@ -1,6 +1,6 @@
 {
-    "name": "gmo-ecs/repository-command",
-    "description": "Core Repository Command",
+    "name": "gmo-ecs/ecs-command",
+    "description": "Command Init Repository and Service",
     "keywords": ["gmo", "ecs", "laravel", "php", "repository"],
     "type": "library",
     "license": "MIT",
@@ -15,13 +15,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Ecs\\RepositoryCommand\\": "src/"
+            "Ecs\\Command\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ecs\\RepositoryCommand\\Providers\\RepositoryCommandServiceProvider"
+                "Ecs\\Command\\Providers\\EcsCommandServiceProvider"
             ]
         }
     }

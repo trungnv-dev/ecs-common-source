@@ -1,12 +1,13 @@
 <?php
 
-namespace Ecs\RepositoryCommand\Providers;
+namespace Ecs\Command\Providers;
 
-use Ecs\RepositoryCommand\Console\RepositoryMakeCommand;
-use Ecs\RepositoryCommand\Console\ServiceMakeCommand;
+use Ecs\Command\Console\RepositoryMakeCommand;
+use Ecs\Command\Console\ServiceMakeCommand;
+use Ecs\Command\Console\CustomControllerMakeCommand;
 use Illuminate\Support\ServiceProvider;
 
-class RepositoryCommandServiceProvider extends ServiceProvider
+class EcsCommandServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
@@ -31,6 +32,7 @@ class RepositoryCommandServiceProvider extends ServiceProvider
             ], 'base-repository');
 
             $this->commands([
+                CustomControllerMakeCommand::class,
                 RepositoryMakeCommand::class,
                 ServiceMakeCommand::class,
             ]);
