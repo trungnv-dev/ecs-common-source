@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedRepository }};
+
+class {{ class }}
+{
+    public function __construct(
+        protected {{ repository }} ${{ repositoryVariable }}
+    ) {}
+
+    public function execute()
+    {
+        // TODO..
+    }
+}

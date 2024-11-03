@@ -1,0 +1,28 @@
+{
+    "name": "gmo-ecs/repository-command",
+    "description": "Core Repository Command",
+    "keywords": ["gmo", "ecs", "laravel", "php", "repository"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Trungnv",
+            "email": "trungnv@runsystem.net"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ecs\\RepositoryCommand\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ecs\\RepositoryCommand\\Providers\\RepositoryCommandServiceProvider"
+            ]
+        }
+    }
+}

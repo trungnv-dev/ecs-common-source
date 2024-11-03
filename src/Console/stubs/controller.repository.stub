@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedRepository }};
+
+class {{ class }} extends Controller
+{
+    public function __construct(
+        protected {{ repository }} ${{ repositoryVariable }}
+    ) {}
+}
