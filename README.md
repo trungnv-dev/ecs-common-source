@@ -1,6 +1,4 @@
-# esc-common
-
-ECS Common Core Laravel 11
+# ECS Common Core Laravel 11
 
 ## Installation
 
@@ -10,13 +8,13 @@ Require this package with composer
 composer require gmo-ecs/ecs-common-source
 ```
 
-Publish config common
+## Publish packages
 
 ```shell
-php artisan vendor:publish --tag="base-common"
+php artisan ecs:installation
 ```
 
-## Repository
+## Repositories
 
 1. Artisan command
 
@@ -30,7 +28,7 @@ php artisan make:repository TestRepository
 php artisan make:repository TestRepository --model=Test
 ```
 
-## Service
+## Services
 
 1. Artisan command
 
@@ -50,7 +48,7 @@ php artisan make:service TestService --repository=TestRepository
 php artisan make:service TestService --repository=TestRepository --model=Test
 ```
 
-## Controller custom when exists option --repository
+## Controllers custom when exists option --repository
 
 1. Specify repository for controller
 ```shell

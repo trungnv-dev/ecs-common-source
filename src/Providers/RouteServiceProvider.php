@@ -41,10 +41,18 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureUsingRoute()
     {
         $this->routes(function () {
-            Route::middleware('web')
-                ->prefix('admin')
-                ->name('admin.')
-                ->group(base_path('routes/admin.php'));
+            if (file_exists($routeApi = base_path('routes/api.php'))) {
+                Route::middleware('api')
+                    ->prefix('api')
+                    ->group($routeApi);
+            }
+
+            if (file_exists($routeAdmin = base_path('routes/admin.php'))) {
+                Route::middleware('web')
+                    ->prefix('admin')
+                    ->name('admin.')
+                    ->group($routeAdmin);
+            }
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
