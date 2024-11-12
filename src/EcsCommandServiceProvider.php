@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecs\Command\Providers;
+namespace Ecs\Command;
 
 use Ecs\Command\Console\RepositoryMakeCommand;
 use Ecs\Command\Console\ServiceMakeCommand;
