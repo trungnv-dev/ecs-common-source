@@ -1,5 +1,5 @@
 {
-    "name": "gmo-ecs/ecs-command",
+    "name": "gmo-ecs/ecs-common-source",
     "description": "Command Init Repository and Service",
     "keywords": ["gmo", "ecs", "laravel", "php", "repository"],
     "type": "library",
@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ecs\\Command\\Providers\\EcsCommandServiceProvider"
+                "Ecs\\Command\\EcsCommandServiceProvider"
             ]
         }
     }
