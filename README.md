@@ -1,19 +1,19 @@
-# esc-command
+# esc-common
 
-Command Init Repository and Service
+ECS Common Core Laravel 11
 
 ## Installation
 
 Require this package with composer
 
 ```shell
-composer require gmo-ecs/ecs-command
+composer require gmo-ecs/ecs-common-source
 ```
 
-Copy base repository after installation
+Publish config common
 
 ```shell
-php artisan vendor:publish --tag="base-repository"
+php artisan vendor:publish --tag="base-common"
 ```
 
 ## Repository

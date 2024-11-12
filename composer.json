@@ -11,17 +11,17 @@
         }
     ],
     "require": {
-        "php": "^8.0"
+        "php": "^8.2"
     },
     "autoload": {
         "psr-4": {
-            "Ecs\\Command\\": "src/"
+            "Ecs\\Common\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ecs\\Command\\EcsCommandServiceProvider"
+                "Ecs\\Common\\EcsCommonServiceProvider"
             ]
         }
     }

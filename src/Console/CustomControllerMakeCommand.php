@@ -1,6 +1,6 @@
 <?php
 
-namespace Ecs\Command\Console;
+namespace Ecs\Common\Console;
 
 use Illuminate\Routing\Console\ControllerMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
